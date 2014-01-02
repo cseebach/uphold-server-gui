@@ -1,0 +1,1 @@
+redis: redis://redistogo:dffa5c4cb21c1e4eca9871d7fc68c861@albacore.redistogo.com:9666/0

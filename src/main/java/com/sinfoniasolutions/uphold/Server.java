@@ -1,10 +1,14 @@
 package com.sinfoniasolutions.uphold;
 
+import com.almworks.sqlite4java.SQLiteException;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.sinfoniasolutions.uphold.model.UpholdModel;
+
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 
 /**
  * Created by Cameron Seebach on 12/26/13.
@@ -25,7 +29,16 @@ public class Server extends Game{
 
     @Override
     public void create() {
-        UpholdModel model = new UpholdModel();
+        UpholdModel model = null;
+        try {
+            model = new UpholdModel();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
         view = new UpholdView(model);
         view.goToOverview();
     }

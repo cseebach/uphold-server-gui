@@ -38,6 +38,9 @@
     <orderEntry type="library" exported="" name="Gradle: jsr305-1.3.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jedis-2.2.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-pool-1.6" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: snakeyaml-1.13" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: sqlite4java-0.282" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: sqlite4java-win32-x86-0.282" level="project" />
   </component>
 </module>
 

@@ -1,5 +1,8 @@
 package com.sinfoniasolutions.uphold.model;
 
+import com.almworks.sqlite4java.SQLiteConnection;
+import redis.clients.jedis.Jedis;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,80 +11,31 @@ import java.util.List;
  */
 public class ComputerDetails {
 
+    private final Jedis jedis;
+    private final String computer;
+    private final SQLiteConnection db;
+
+    public ComputerDetails(Jedis jedis, SQLiteConnection db, String computer){
+        this.jedis = jedis;
+        this.db = db;
+        this.computer = computer;
+    }
+
     public List<String> getTasksWaiting(){
-        ArrayList<String> waiting = new ArrayList<String>();
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
-        waiting.add("update Java");
-        waiting.add("update LogMeIn");
-        waiting.add("install some MSI");
+        ArrayList<String> waiting = new ArrayList<String>(jedis.lrange("tasks:" + computer, 0, -1));
         return waiting;
     }
 
     public List<String> getRecentMessages(){
-        ArrayList<String> done = new ArrayList<String>();
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        done.add("ran; nothing to do");
-        done.add("updated Flash");
-        done.add("put some files");
-        return done;
+        storeRecentMessages();
+        return loadRecentMessages();
+    }
+
+    private List<String> loadRecentMessages() {
+        return new ArrayList<String>();
+    }
+
+    private void storeRecentMessages() {
     }
 
 }
